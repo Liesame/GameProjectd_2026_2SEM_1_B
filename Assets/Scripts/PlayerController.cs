@@ -2,6 +2,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
+public enum PlayerState
+{
+    Normal, PickUp
+}
+
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
@@ -17,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     private CharacterController controller;
     private float verticalVelocity;
+    private PlayerState currentStata = PlayerState.Normal;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,6 +41,16 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        ApplyGravity();
+
+        if (currentStata != PlayerState.Normal) return;
+
+        HandleMovement(keyboard);
+
+    }
+
+    private void HandleMovement(Keyboard keyboard)
+    {
         Vector2 input = Vector2.zero;
 
         if (keyboard.aKey.isPressed)
@@ -70,7 +87,19 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
-        if(controller.isGrounded && verticalVelocity < 0f)
+        float animationSpeed = 0f;
+
+        if (moveDirection.sqrMagnitude > 0.001f)
+        {
+            animationSpeed = isRunning ? 1f : 0.5f;
+        }
+
+        animator.SetFloat("speed", animationSpeed, 0.1f, Time.deltaTime);
+    }
+
+    private void ApplyGravity()
+    {
+        if (controller.isGrounded && verticalVelocity < 0f)
         {
             verticalVelocity = -2f;
         }
@@ -80,14 +109,17 @@ public class PlayerController : MonoBehaviour
         }
 
         controller.Move(Vector3.up * verticalVelocity * Time.deltaTime);
+    }
 
-        float animationSpeed = 0f;
+    public void ChangeState(PlayerState newState)
+    {
+        currentStata = newState;
 
-        if (moveDirection.sqrMagnitude > 0.001f)
+        if (currentStata != PlayerState.Normal)
         {
-            animationSpeed = isRunning ? 1f : 0.5f;
+            animator.SetFloat("speed", 0);
         }
 
-        animator.SetFloat("speed", animationSpeed, 0.1f, Time.deltaTime);
+        Debug.Log("현재 상태 : " + currentStata);
     }
 }
