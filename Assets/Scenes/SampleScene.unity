@@ -3656,7 +3656,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB098"
+  m_text: "\uB098\nme\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0f86eb043d66c2d48b1abe84a1781686, type: 2}
   m_sharedMaterial: {fileID: 5711004383490263166, guid: 0f86eb043d66c2d48b1abe84a1781686, type: 2}
