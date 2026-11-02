@@ -2817,7 +2817,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD018\uC2A4\uD2B8\n\uD018\uC2A4\uD2B8\n"
+  m_text: "\uD018\uC2A4\uD2B8\n\uD018\uC2A4\uD2B8\nQuest"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0f86eb043d66c2d48b1abe84a1781686, type: 2}
   m_sharedMaterial: {fileID: 5711004383490263166, guid: 0f86eb043d66c2d48b1abe84a1781686, type: 2}
