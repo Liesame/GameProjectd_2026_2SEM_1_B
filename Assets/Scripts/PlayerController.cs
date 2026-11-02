@@ -1,11 +1,12 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 
 public enum PlayerState
 {
-    Normal, PickUp
+    Normal, 
+    PickUp, 
+    Inventory
 }
 
 public class PlayerController : MonoBehaviour
@@ -121,5 +122,10 @@ public class PlayerController : MonoBehaviour
         }
 
         Debug.Log("현재 상태 : " + currentStata);
+    }
+
+    public bool IsNormalState()
+    {
+        return currentStata == PlayerState.Normal;
     }
 }
