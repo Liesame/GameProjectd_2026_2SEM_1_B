@@ -9,10 +9,13 @@ public class QuestManager : MonoBehaviour
 
     private SimpleInventory inventory;
 
+    private AchievementManager achievementManager;
+
 
     private void Awake()
     {
-        inventory = FindFirstObjectByType<SimpleInventory>)();
+        inventory = FindFirstObjectByType<SimpleInventory>();
+        achievementManager = FindFirstObjectByType<AchievementManager>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -45,6 +48,11 @@ public class QuestManager : MonoBehaviour
         }
 
         currentQuest.state = QuestState.Completed;
+
+        if (achievementManager != null)
+        {
+            achievementManager.QuestComplrted();
+        }
 
         Debug.Log(currentQuest.questName + "퀘스트 완료!");
         UpdateQuestText();
